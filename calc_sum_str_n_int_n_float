@@ -1,0 +1,29 @@
+def calculate_sum_str_n_int(data):
+    total_sum = 0
+    def rec_trav(element):
+        nonlocal total_sum
+        if isinstance(element,int) or isinstance(element,float):
+            total_sum += element
+        elif isinstance(element,str):
+            total_sum += len(element)
+        elif isinstance(element,list) or isinstance(element,tuple) or isinstance(element,set):
+            for item in element:
+                rec_trav(item)
+        elif isinstance(element,dict):
+            for key, value in element.items():
+                rec_trav(key)
+                rec_trav(value)
+
+    rec_trav(data)
+    return total_sum
+
+data_structure = [
+    [1, 2, 3],
+    {'a': 4, 'b': 5},
+    (6, {'cube': 7, 'drum': 8}),
+    "Hello",
+    ((), [{(2, 'Urban', ('Urban2', 35))}])
+]
+
+result = calculate_sum_str_n_int(data_structure)
+print(result)
